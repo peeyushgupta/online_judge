@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Online Judge</title>
+    {% load staticfiles %}
+<link rel="stylesheet" href={% static "styles.css" %} type="text/css" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--
+corps, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+</head>
+<body>
+<div id="container">
+    <header>
+	<div class="width">
+    		<h1><a href="/">Online<span>Programming</span>Judge</a></h1>
+        	<h2>by peeyush gupta</h2>
+	</div>
+    </header>
+    <nav>
+	<div class="width">
+    		<ul>
+        		<li ><a href="/judge/index">Home</a></li>
+        	    <li class="start selected"><a href="/judge/questions">Problems</a></li>
+         	   	<li><a href="/judge/submissions">Submissions</a></li>
+          	  	<li><a href="/judge/ranks">Ranks</a></li>
+        	</ul>
+	</div>
+    </nav>
+
+
+    <div id="body" class="width">
+
+		
+
+		<section id="content">
+
+
+                 {{question|safe|escape}}
+
+
+
+
+        </section>
+        
+        <aside class="sidebar">
+	
+            <ul>	
+               <li>
+                   {% if logged%}
+                   <h4>Welcome {{ email }}</h4>
+                   <a href="logout" class="logout">Logout &raquo;</a>
+                   {% else %}
+                    <h4>Login</h4><p>
+                    <form action="" method="post">
+                        <table style = "">{% csrf_token %}
+                        {{ form }}
+                       </table>
+                    <input type="submit" style="margin-left: 100px;" class="formbutton" value="Submit" />
+                    </form></p>
+                   <a href="register" class="register">Not a user, Register here &raquo;</a>
+                   {% endif %}
+                   {% if incorrect_credentials %}
+                     <br/>Incorrect Credentials <br/>
+
+                   {%  endif %}
+
+                </li>
+                
+                <li>
+                    <h4>About us</h4>
+                    <ul>
+                        <li class="text">
+                        	<p style="margin: 0;">Python developer at MySQL Oracle, Working on Connector/Python and MySQL Server.</p>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                	<h4>Search site</h4>
+                    <ul>
+                    	<li class="text">
+                            <form method="get" class="searchform" action="#" >
+                                <p>
+                                    <input type="text" size="32" value="" name="s" class="s" />
+                                    
+                                </p>
+                            </form>	
+						</li>
+					</ul>
+                </li>
+                
+                <li>
+                    <h4>Helpful Links</h4>
+                    <ul>
+                        <li><a href="http://topcoder.com" title="topcoder">Topcoder</a></li>
+                        <li><a href="http://spoj.com" title="spoj">SPOJ Online Judge</a></li>
+                        <li><a href="http://oj.leetcode.com" title="Tux Themes">Leet Code</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+		
+        </aside>
+    	<div class="clear"></div>
+    </div>
+    <footer>
+        <div class="footer-content width">
+            <ul>
+            </ul>
+            
+            <ul>
+            </ul>
+            
+            <ul class="endfooter">
+            </ul>
+            
+            <div class="clear"></div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Peeyush Gupta 2014. <a href="http://dev.mysql.com/">MySQL</a> by Peeyush</p>
+         </div>
+    </footer>
+</div>
+</body>
+</html>

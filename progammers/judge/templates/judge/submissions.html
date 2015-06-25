@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 94%;
+    border-collapse: collapse;
+}
+
+#customers td, #customers th {
+    font-size: 1em;
+    border: 1px solid #00A0EB;
+    padding: 3px 7px 2px 7px;
+}
+
+#customers th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #00A0EB;
+    color: #ffffff;
+}
+
+#customers tr.alt td {
+    color: #000000;
+    background-color: #00A0EB;
+}
+
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Online Judge</title>
+    {% load staticfiles %}
+<link rel="stylesheet" href={% static "styles.css" %} type="text/css" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--
+corps, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+</head>
+<body>
+<div id="container">
+    <header>
+	<div class="width">
+    		<h1><a href="/">Online<span>Programming</span>Judge</a></h1>
+        	<h2>by peeyush gupta</h2>
+	</div>
+    </header>
+    <nav>
+	<div class="width">
+    		<ul>
+        		<li ><a href="index">Home</a></li>
+        	    <li class=""><a href="questions">Problems</a></li>
+         	   	<li class="start selected"><a href="submissions">Submissions</a></li>
+          	  	<li><a href="ranks">Ranks</a></li>
+                                 {% if logged%}
+                <li><a href="submit">Submit</a></li>
+                {% endif %}
+        	</ul>
+	</div>
+    </nav>
+
+
+    <div id="body" class="width">
+
+		
+
+		<section id="content">
+
+	      <fieldset>
+
+                <legend><h2>Submissions </h2></legend>
+                 <table id="customers">
+                         <tr>
+                             <th>ID</th>
+                             <th>Name</th>
+                             <th>Question</th>
+                             <th>Language</th>
+                             <th>Status</th>
+
+                         </tr>
+
+                {% for s in submissions %}
+                     <tr>
+                         <td>{{s.s_id}}</td>
+                         <td>{{s.u_id.name}} </a></td>
+                         <td>{{s.q_id.caption}} </a></td>
+                         <td>{{s.lang}} </a></td>
+                         {% if s.status == 0 %}
+                             <td style="color: violet"> Compilation Error </td>
+                             {% endif %}
+                             {% if s.status == 1 %}
+                             <td style="color: red"> Wrong Answer </td>
+                             {% endif %}
+                             {% if s.status == 2 %}
+                             <td style="color: violet"> Time Limit Exceeded </td>
+                             {% endif %}
+                             {% if s.status == 3 %}
+                             <td style="color: violet"> Runtime Error </td>
+                             {% endif %}
+                             {% if s.status == 4 %}
+                             <td style="color: green"> Accepted </td>
+                         {% endif %}
+                     </tr>
+                {% endfor %}
+                 </table>
+            </fieldset>
+
+        </section>
+        
+        <aside class="sidebar">
+	
+            <ul>	
+               <li>
+                   {% if logged%}
+                   <h4>Welcome {{ email }}</h4>
+                   <a href="logout" class="logout">Logout &raquo;</a>
+                   {% else %}
+                    <h4>Login</h4><p>
+                    <form action="" method="post">
+                        <table style = "">{% csrf_token %}
+                        {{ form }}
+                       </table>
+                    <input type="submit" style="margin-left: 100px;" class="formbutton" value="Submit" />
+                    </form></p>
+                   <a href="register" class="register">Not a user, Register here &raquo;</a>
+                   {% endif %}
+                   {% if incorrect_credentials %}
+                     <br/>Incorrect Credentials <br/>
+
+                   {%  endif %}
+
+                </li>
+                
+                <li>
+                    <h4>About us</h4>
+                    <ul>
+                        <li class="text">
+                        	<p style="margin: 0;">Python developer at MySQL Oracle, Working on Connector/Python and MySQL Server.</p>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                	<h4>Search site</h4>
+                    <ul>
+                    	<li class="text">
+                            <form method="get" class="searchform" action="#" >
+                                <p>
+                                    <input type="text" size="32" value="" name="s" class="s" />
+                                    
+                                </p>
+                            </form>	
+						</li>
+					</ul>
+                </li>
+                
+                <li>
+                    <h4>Helpful Links</h4>
+                    <ul>
+                        <li><a href="http://topcoder.com" title="topcoder">Topcoder</a></li>
+                        <li><a href="http://spoj.com" title="spoj">SPOJ Online Judge</a></li>
+                        <li><a href="http://oj.leetcode.com" title="Tux Themes">Leet Code</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+		
+        </aside>
+    	<div class="clear"></div>
+    </div>
+    <footer>
+        <div class="footer-content width">
+            <ul>
+            </ul>
+            
+            <ul>
+            </ul>
+            
+            <ul class="endfooter">
+            </ul>
+            
+            <div class="clear"></div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Peeyush Gupta 2014. <a href="http://dev.mysql.com/">MySQL</a> by Peeyush</p>
+         </div>
+    </footer>
+</div>
+</body>
+</html>
